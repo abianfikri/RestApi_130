@@ -46,7 +46,7 @@ public class ProductServiceController {
     public ResponseEntity<Object> createProduct(@RequestBody Product product){
         
         if(productRepo.containsKey(product.getId())){
-            return new ResponseEntity<>("Data tidak Boleh sama", HttpStatus.OK);
+            return new ResponseEntity<>("ID Product Cannot be the Same, please check again", HttpStatus.OK);
         }
         else{
             productRepo.put(product.getId(), product);
@@ -59,7 +59,7 @@ public class ProductServiceController {
     public ResponseEntity<Object> updateProduct(@PathVariable("id") String id, @RequestBody Product product){
         
         if(!productRepo.containsKey(id)){
-            return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Product Not Found, Please check again", HttpStatus.NOT_FOUND);
         }
         else{
             productRepo.remove(id);
