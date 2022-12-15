@@ -12,6 +12,24 @@ package pws.c.restApi_Projects;
 public class Product {
     private String id;
     private String name;
+    private String Qty;
+    private String price;
+
+    public String getQty() {
+        return Qty;
+    }
+
+    public void setQty(String Qty) {
+        this.Qty = Qty;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
 
     public String getId() {
         return id;
