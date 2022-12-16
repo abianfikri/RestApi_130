@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class ProductServiceController {
+    // membuat array hashMap dengan nama variable productRepo
     private static HashMap<String, Product > productRepo = new HashMap<>();
     
     static{
@@ -39,32 +40,36 @@ public class ProductServiceController {
         productRepo.put(almond.getId(), almond);
     }
     
-    // Get API
+    // Get API products
     @RequestMapping(value="/products")
     public ResponseEntity<Object> getProduct(){
        return new ResponseEntity<>(productRepo.values(), HttpStatus.OK);
     }
     
-    // Post API
+    // Post API prdoucts(method create product)
     @RequestMapping(value = "/products", method = RequestMethod.POST)
     public ResponseEntity<Object> createProduct(@RequestBody Product product){
         
+        // membuat kondisi validasi ID product di method POST
         if(productRepo.containsKey(product.getId())){
             return new ResponseEntity<>("ID Product "  + product.getId().toString() +" Cannot be the Same" +",Please check again", HttpStatus.OK);
         }
+        // membuat kondisi respon validasi ID succes ditambahkan
         else{
             productRepo.put(product.getId(), product);
             return new ResponseEntity<>("Product is created Successfully", HttpStatus.CREATED);
         }
     }
     
-    // PUT API
+    // PUT API prdocuts (method update product)
     @RequestMapping(value = "/products/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Object> updateProduct(@PathVariable("id") String id, @RequestBody Product product){
         
+        // membuat kondisi validasi ID product di method PUT
         if(!productRepo.containsKey(id)){
             return new ResponseEntity<>("Product Not Found to updated ID " + id +" ,Please check again", HttpStatus.NOT_FOUND);
         }
+        // membuat kondisi respon validasi ID succes di update
         else{
             productRepo.remove(id);
             product.setId(id);
@@ -74,13 +79,15 @@ public class ProductServiceController {
         
     }
     
-    // DELETE API
+    // DELETE API products
     @RequestMapping(value = "/products/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteProduct(@PathVariable("id") String id){
         
+        // membuat kondisi validasi ID di method DELETE
         if(!productRepo.containsKey(id)){
             return new ResponseEntity<>("Product Not Found to deleted " + id +" ,Please check again", HttpStatus.NOT_FOUND);
         }
+        // membuat kondisi respon validasi ID succes di delete
         else{
             productRepo.remove(id);
             return new ResponseEntity<>("Product is deleted successfully", HttpStatus.OK);
