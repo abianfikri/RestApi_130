@@ -5,6 +5,7 @@
  */
 package pws.c.restApi_Projects;
 
+import model.Product;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.http.HttpStatus;
